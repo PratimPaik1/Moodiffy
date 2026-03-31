@@ -19,7 +19,7 @@ export const useSong=()=>{
             
             
             setallSong(response.data.songs)
-            console.log(response.data.songs)
+           // console.log(response.data.songs)
             setsong(response.data.songs[0])
             
             return response

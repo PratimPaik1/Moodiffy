@@ -6,7 +6,6 @@ import './Home.scss'
 
 
 import { useNavigate } from 'react-router'
-import Cookies from 'js-cookie'
 import AllSongs from '../components/AllSongs'
 const Home = () => {
     const { handleGetSong } = useSong()
@@ -45,8 +44,8 @@ useEffect(() => {
                     <h2 className="section-title">Your Song</h2>
                     <PlaySong />
                 </div>
-                <div>
-                    <h2>Songs based on your mood</h2>
+                <div className="songs-section">
+                    <h2 className="section-title">Songs based on your mood</h2>
                     <AllSongs/>
                 </div>
             </div>
