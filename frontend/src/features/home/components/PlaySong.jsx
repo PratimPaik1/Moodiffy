@@ -79,7 +79,7 @@ export const PlaySong = () => {
     // Handle song end
     const handleSongEnd = () => {
 
-        setIsPlaying(false);
+        setIsPlaying(true);
     };
 
     useEffect(()=>{

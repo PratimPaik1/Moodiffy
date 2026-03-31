@@ -6,13 +6,17 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
 async function registerController(req, res) {
+    // console.log("hi from local server")
     const { userName, email, password } = req.body
 
+    const user = userName?.toLowerCase()
+const userEmail = email?.toLowerCase()
+    // console.log(user,userEmail)
     //check user is exists with this email and username or not
     const isUserExists = await userModel.findOne({
         $or: [
-            { userName: userName },
-            { email: email }
+            { userName: user },
+            { email: userEmail }
         ]
     });
 
@@ -29,7 +33,8 @@ async function registerController(req, res) {
     //user regestration
 
     const newUser = await userModel.create({
-        userName, email,
+        userName:user,
+         email:userEmail,
         password: hash
     })
 
@@ -56,10 +61,15 @@ async function registerController(req, res) {
 async function loginController(req, res) {
     const { userName, email, password } = req.body
     //checking user is exist or not
+      
+
+    const user=userName.toLowerCase()
+    const userEmail=email.toLowerCase()
+    // console.log(user,"hi",userEmail)
     const isUserExists = await userModel.findOne({
         $or: [
-            { userName: userName },
-            { email: email }
+            { userName: user},
+            { email: userEmail }
         ]
     }).select("+password")
     if (!isUserExists) {

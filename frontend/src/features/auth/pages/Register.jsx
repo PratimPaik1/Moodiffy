@@ -12,7 +12,13 @@ const Register = () => {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const navigate = useNavigate()
-  const { loading, handelRegister } = useAuth()
+  const { loading, handelRegister, user, authChecked } = useAuth()
+
+  useEffect(() => {
+    if (authChecked && user) {
+      navigate("/")
+    }
+  }, [authChecked, user, navigate])
 
   if (loading) {
     return <h1>loading</h1>

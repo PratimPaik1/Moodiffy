@@ -1,32 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSong } from '../hooks/useSong'
 import PlaySong from '../components/PlaySong'
 import Expression from '../../faces/pages/Expression'
 import './Home.scss'
 
-
-import { useNavigate } from 'react-router'
 import AllSongs from '../components/AllSongs'
+
+
 const Home = () => {
     const { handleGetSong } = useSong()
-    const navigate=useNavigate()
-useEffect(() => {
-    const verifyUser = async () => {
-        try {
-            const res = await fetch("/api/auth/me", {
-                credentials: "include"
-            })
-
-            if (!res.ok) {
-                navigate("/login")
-            }
-        } catch (err) {
-            navigate("/login")
-        }
-    }
-
-    verifyUser()
-}, [navigate])
     return (
         <div className="home-container">
             <div className="home-header">

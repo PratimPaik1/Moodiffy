@@ -12,8 +12,15 @@ const Login = () => {
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
 
-  const { handleLogin, loading } = useAuth()
+  const { handleLogin, loading, user, authChecked } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (authChecked && user) {
+      navigate("/")
+    }
+  }, [authChecked, user, navigate])
+
   if (loading) {
     return <h1>Loading</h1>
   }
