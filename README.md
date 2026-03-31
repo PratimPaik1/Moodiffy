@@ -1,63 +1,82 @@
-🎧 Moodify – Emotion-Based Music Player
-Feel your mood. Hear your vibe.
+# 🎧 Moodify – Emotion-Based Music Player  
 
-Moodify is a full-stack music web application that intelligently plays songs based on user mood.
-It provides a personalized, dynamic, and immersive music experience using modern web technologies.
+**Feel your mood. Hear your vibe.**  
 
-🚀 Live Demo
-👉 Open Moodify
+Moodify is a full-stack music web application that intelligently plays songs based on user mood.  
+It provides a **personalized, dynamic, and immersive music experience** using modern web technologies.
 
-📂 GitHub Repository
-👉 View Source Code
+---
 
-✨ Features
-🎭 Emotion-Based Recommendations
-Music adapts dynamically based on user mood
+## 🚀 Live Demo  
+👉 [Open Moodify](https://moodiffy.onrender.com/)
 
-🎵 Custom Music Player
-Play, pause, seek & control playback speed
+## 📂 GitHub Repository  
+👉 [View Source Code](https://github.com/PratimPaik1/Moodiffy)
 
-🔐 Secure Authentication
-Login & Register with session management
+---
 
-🔄 Persistent Login
-User stays logged in even after refresh
+## ✨ Features  
 
-📦 REST API Backend
-Clean and scalable backend architecture
+- 🎭 **Emotion-Based Recommendations**  
+  Music adapts dynamically based on user mood  
 
-⚡ Redis Caching
-Faster response time and optimized performance
+- 🎵 **Custom Music Player**  
+  Play, pause, seek & control playback speed  
 
-☁️ ImageKit Integration
-Efficient media storage and delivery
+- 🔐 **Secure Authentication**  
+  Login & Register with session management  
 
-🎬 Picture-in-Picture (PiP)
-Continue music while multitasking
+- 🔄 **Persistent Login**  
+  User stays logged in even after refresh  
 
-🛠️ Tech Stack
-🎨 Frontend
-React.js
-SCSS
-Axios
-⚙️ Backend
-Node.js
-Express.js
-🗄️ Database & Services
-MongoDB
-Redis
-ImageKit
-🔐 Authentication Flow
-Cookie / JWT-based authentication
-Secure session handling
-Protected routes for authorized users
-Refresh-safe login system
-⚙️ Installation & Setup
-1️⃣ Clone the Repository
+- 📦 **REST API Backend**  
+  Clean and scalable backend architecture  
+
+- ⚡ **Redis Caching**  
+  Faster response time and optimized performance  
+
+- ☁️ **ImageKit Integration**  
+  Efficient media storage and delivery  
+
+- 🎬 **Picture-in-Picture (PiP)**  
+  Continue music while multitasking  
+
+---
+
+## 🛠️ Tech Stack  
+
+### 🎨 Frontend  
+- React.js  
+- SCSS  
+- Axios  
+
+### ⚙️ Backend  
+- Node.js  
+- Express.js  
+
+### 🗄️ Database & Services  
+- MongoDB  
+- Redis  
+- ImageKit  
+
+---
+
+## 🔐 Authentication Flow  
+
+- Cookie / JWT-based authentication  
+- Secure session handling  
+- Protected routes for authorized users  
+- Refresh-safe login system  
+
+---
+
+## ⚙️ Installation & Setup  
+
+### 1️⃣ Clone the Repository  
+```bash
 git clone https://github.com/PratimPaik1/Moodiffy.git
 cd Moodiffy
-
-
+```
 2️⃣ Install Dependencies
 Backend
 cd Backend
@@ -77,7 +96,6 @@ REDIS_PORT=your_redis_port
 REDIS_PASSWORD=your_redis_password
 
 IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
-
 4️⃣ Run the Application
 Backend
 npm run dev
