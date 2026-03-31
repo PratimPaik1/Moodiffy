@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <div className="home-container">
             <div className="home-header">
-                <h1 className="main-title">🎵 Moodify</h1>
+                <h1 className="main-title">🎵 Moodiffy</h1>
                 <p className="subtitle">Detect Your Mood, Get Perfect Music</p>
             </div>
 
