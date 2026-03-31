@@ -4,10 +4,30 @@ import PlaySong from '../components/PlaySong'
 import Expression from '../../faces/pages/Expression'
 import './Home.scss'
 
+
+import { useNavigate } from 'react-router'
+import Cookies from 'js-cookie'
+import AllSongs from '../components/AllSongs'
 const Home = () => {
     const { handleGetSong } = useSong()
+    const navigate=useNavigate()
+useEffect(() => {
+    const verifyUser = async () => {
+        try {
+            const res = await fetch("/api/auth/me", {
+                credentials: "include"
+            })
 
+            if (!res.ok) {
+                navigate("/login")
+            }
+        } catch (err) {
+            navigate("/login")
+        }
+    }
 
+    verifyUser()
+}, [navigate])
     return (
         <div className="home-container">
             <div className="home-header">
@@ -24,6 +44,10 @@ const Home = () => {
                 <div className="player-section">
                     <h2 className="section-title">Your Song</h2>
                     <PlaySong />
+                </div>
+                <div>
+                    <h2>Songs based on your mood</h2>
+                    <AllSongs/>
                 </div>
             </div>
         </div>

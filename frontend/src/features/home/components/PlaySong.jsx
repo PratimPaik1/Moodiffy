@@ -78,12 +78,27 @@ export const PlaySong = () => {
 
     // Handle song end
     const handleSongEnd = () => {
+
         setIsPlaying(false);
     };
 
     useEffect(()=>{
-        setIsPlaying(false)
-    },[song])
+        const audio = audioRef.current;
+        if (!audio || !song?.url) return;
+
+        audio.pause();
+        audio.load();
+        setCurrentTime(0);
+        setDuration(0);
+
+        const playPromise = audio.play();
+        if (playPromise && typeof playPromise.then === "function") {
+            playPromise
+                .then(() => setIsPlaying(true))
+                .catch(() => setIsPlaying(false));
+        }
+    },[song]);
+
     const moodColor = moodColors[song?.mood?.toLowerCase()] || moodColors.default;
 
     return (

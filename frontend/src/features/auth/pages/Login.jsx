@@ -4,7 +4,9 @@ import '../style/form.scss'
 import { Link } from 'react-router'
 import { useNavigate } from 'react-router'
 
-import {useAuth} from '../hooks/useAuth'
+import { ToastContainer, toast } from 'react-toastify';
+
+import { useAuth } from '../hooks/useAuth'
 
 const Login = () => {
   const [userName, setUserName] = useState("")
@@ -12,7 +14,7 @@ const Login = () => {
 
   const { handleLogin, loading } = useAuth()
   const navigate = useNavigate()
-     if (loading) {
+  if (loading) {
     return <h1>Loading</h1>
   }
 
@@ -20,23 +22,37 @@ const Login = () => {
     e.preventDefault()
 
     try {
+      if (!userName || userName.trim() === "") {
+        return toast.error("User Name is required");
+      }
+      
+      if (password=== "") {
+        return toast.error("PASSWORD is required");
+      }
       const res = await handleLogin(userName, password)
-      console.log(res)
+        
+     
+
 
       setUserName("")
       setPassword("")
-      console.log("hello")
 
-      navigate("/") 
+      navigate("/")
 
     } catch (err) {
+
+
+      //  console.log(err.message)
+       if(err.response && err.response.status === 400){
+             return toast.error(err.response.data.message)
+       }
       setUserName("")
       setPassword("")
-      console.log(err.response)
+      // console.log(err.response)
       navigate("/Login")
     }
   }
-  
+
   return (
     <div className='main'>
       <h1 className='heading'>Login</h1>

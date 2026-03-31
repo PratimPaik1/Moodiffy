@@ -38,17 +38,14 @@ async function uploadSong(req, res) {
 
 async function getSong(req, res) {
     const { mood } = req.query;
-
-    const songs = await songModel.aggregate([
-        { $match: { mood } },
-        { $sample: { size: 1 } } 
-    ]);
-
-    const song = songs[0];
+ 
+    const songs = await songModel.find({mood:mood});
+   
+    
 
     res.status(200).json({
         message: "song fetched successfully.",
-        song,
+        songs,
     });
 }
 

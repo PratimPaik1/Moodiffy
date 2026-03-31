@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import FormLabel from '../components/FormLabel'
 import '../style/form.scss'
-import { Link,useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
+
+import { toast } from 'react-toastify';
 
 import { useAuth } from '../hooks/useAuth'
 const Register = () => {
@@ -9,22 +11,51 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const { loading, handelRegister } = useAuth()
- 
-  if(loading){
+
+  if (loading) {
     return <h1>loading</h1>
   }
   async function handelSubmit(e) {
     e.preventDefault()
-    try{
-      if(password!=confirmPassword){
-           setPassword("")
-      setConfirmPassword("")
-     
-         return console.log("password not match")
+    try {
+
+
+      if (!userName || userName.trim() === "") {
+        return toast.error("User Name is required");
       }
-      const response=await handelRegister(userName,email,password)
+
+      if (!email || email.trim() === "") {
+        return toast.error("Email is required");
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(email)) {
+        return toast.error("Invalid email format");
+      }
+      const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+
+      if (!password) {
+        return toast.error("Password is required");
+      }
+
+      if (!passwordRegex.test(password)) {
+        return toast.error(
+          "Password must be at least 8 characters, include 1 uppercase and 1 special character"
+        );
+      }
+
+      if (!confirmPassword) {
+        return toast.error("Confirm Password is required");
+      }
+
+      if (password !== confirmPassword) {
+        return toast.error("Passwords do not match");
+      }
+      const response = await handelRegister(userName, email, password)
       console.log(response)
       setUserName("")
       setEmail("")
@@ -33,12 +64,28 @@ const Register = () => {
       navigate("/")
 
     }
-    catch(err){
-      
-      console.log(err)
+    catch (err) {
+  console.log(err);
 
-    }
-    
+  const status = err.response?.status;
+  const message = err.response?.data?.message;
+
+  if (status === 409) {
+    return toast.error(message || "User already exists");
+  }
+
+  if (status === 400) {
+    return toast.error(message || "Invalid input");
+  }
+
+  if (status === 500) {
+    return toast.error("Server error, try again later");
+  }
+
+  // fallback
+  toast.error(message || "Something went wrong");
+}
+
 
   }
 

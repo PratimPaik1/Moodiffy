@@ -5,17 +5,22 @@ import { songContext } from "../Song.conext";
 
 export const useSong=()=>{
     const conext=useContext(songContext)
+    if (!conext) {
+        throw new Error("useSong must be used within SongProvider");
+    }
 
-    const {loading,setLoading,song,setsong}=conext
+    const {loading, setLoading, song, setsong ,allSong,setallSong}=conext
 
     async function handleGetSong({mood}) {
         setLoading(true);
         try {
             const response=await getSong({mood})
-            console.log(response.data.song)
+            //  console.log(response.data.songs)
             
-            // Update the song in context
-            setsong(response.data.song)
+            
+            setallSong(response.data.songs)
+            console.log(response.data.songs)
+            setsong(response.data.songs[0])
             
             return response
         } catch (error) {
@@ -26,5 +31,5 @@ export const useSong=()=>{
         }
     }
 
-    return {handleGetSong,song,loading}
+    return {handleGetSong,song,loading,setLoading,setsong,allSong,setallSong}
 }
